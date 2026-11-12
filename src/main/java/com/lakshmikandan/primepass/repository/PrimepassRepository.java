@@ -1,0 +1,17 @@
+package com.lakshmikandan.primepass.repository;
+
+import com.lakshmikandan.primepass.model.PrimepassModel;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Set;
+
+@Repository
+public interface PrimepassRepository extends JpaRepository<PrimepassModel,Integer> {
+   @Query(value = "select * from primepass_model where movename like CONCAT('%',:search,'%');", nativeQuery = true)
+    List<PrimepassModel> findBySearch(@Param("search") String search);
+    PrimepassModel findByMovename(String mName);
+}
